@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Регистрация</h1>
+
+    <!-- Page description -->
+    <p>Мы отправили вам на электронную почту ссылку для подтверждения вашего аккаунта. Для продолжения, необходимо по
+        ней перейти. Если хотите перейти к странице авторизации, то нажмите на кнопку ниже.</p>
+    <hr>
+
+    <!-- Open login button -->
+    <a class="btn btn-warning pull-right" href="{% url 'login' %}">Перейти</a>
+
+{% endblock %}

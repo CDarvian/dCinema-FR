@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Выход{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Выход</h1>
+
+    <!-- Page description -->
+    <p>Выход из системы завершен. Для перехода к форме авторизации нажмите на кнопку ниже.</p>
+    <hr>
+
+    <!-- Open login button -->
+    <a class="btn btn-warning pull-right" href="{% url 'login' %}">Перейти</a>
+
+{% endblock %}

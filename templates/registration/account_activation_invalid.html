@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Регистрация</h1>
+
+    <!-- Page description -->
+    <p>Ссылка повреждена, попробуйте попытку позднее. Если хотите открыть форму входа, то нажмите на кнопку ниже.</p>
+    <hr>
+
+    <a class="btn btn-warning pull-right" href="{% url 'login' %}">Перейти</a>
+
+{% endblock %}

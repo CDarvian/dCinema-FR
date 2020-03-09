@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Авторизация</h1>
+
+    {% if form.errors %}
+
+        <!-- Error text -->
+        <p style="color: red;">Ваше имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз.</p>
+        <hr>
+
+        <!-- Login form -->
+        <form method="post" action="{% url 'login' %}">
+
+            <!-- CSRF Protection -->
+            {% csrf_token %}
+
+            <!-- Form group block -->
+            <div class="form-group">
+
+                <!-- Username field -->
+                <input type="text" name="username" required class="form-control input-lg is-invalid"
+                       placeholder="Логин:" autocomplete="off">
+            </div>
+
+            <!-- Form group block -->
+            <div class="form-group">
+
+                <!-- Password field -->
+                <input type="password" name="password" required class="form-control input-lg is-invalid"
+                       placeholder="Пароль:" autocomplete="off">
+            </div>
+
+            <!-- Form group block -->
+            <div class="form-group">
+
+                <!-- Reset password link -->
+                <a href="#">Забыли пароль?</a>
+            </div>
+
+            <!-- Register link -->
+            <a href="{% url 'registration:register' %}" class="btn btn-warning pull-left">Регистрация</a>
+
+            <!-- Login button -->
+            <button type="submit" class="btn btn-warning pull-right">
+
+                <!-- Lock icon -->
+                <i class="glyphicon glyphicon-lock"></i>
+            </button>
+        </form>
+
+    {% elif user.is_authenticated %}
+
+        <!-- Always auth text -->
+        <p>Вы уже авторизированы. Если хотите открыть ваш профиль, то нажмите на кнопку ниже.</p>
+        <hr>
+
+        <!-- Open profile button -->
+        <a class="btn btn-warning pull-right" href="{% url 'profile' %}">Перейти</a>
+
+    {% else %}
+
+        <hr>
+
+        <!-- Login form -->
+        <form method="post" action="{% url 'login' %}">
+
+            <!-- CSRF Protection -->
+            {% csrf_token %}
+
+            <!-- Form group block -->
+            <div class="form-group">
+
+                <!-- Username field -->
+                <input type="text" name="username" required class="form-control input-lg" placeholder="Логин:"
+                       autocomplete="off">
+            </div>
+
+            <!-- Form group block -->
+            <div class="form-group">
+
+                <!-- Password field -->
+                <input type="password" name="password" required class="form-control input-lg" placeholder="Пароль:"
+                       autocomplete="off">
+            </div>
+
+            <!-- Form group block -->
+            <div class="form-group">
+
+                <!-- Reset password link -->
+                <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+            </div>
+
+            <!-- Register link -->
+            <a href="{% url 'registration:register' %}" class="btn btn-warning pull-left">Регистрация</a>
+
+            <!-- Login button -->
+            <button type="submit" class="btn btn-warning pull-right">
+
+                <!-- Lock icon -->
+                <i class="glyphicon glyphicon-lock"></i>
+            </button>
+        </form>
+
+    {% endif %}
+
+{% endblock %}

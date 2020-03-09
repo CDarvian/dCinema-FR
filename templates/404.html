@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Не найдено{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1 class="text-center" style="font-size: 120px">404</h1>
+    <hr>
+
+    <!-- Page description -->
+    <p>Страница которую вы ищите не была найдена или удалена, если вы считаете что какая-то ссылка повреждена, то
+        обратитесь к <a href="{% url 'contacts:index' %}">администрации портала</a>.</p>
+
+    <!-- Clear deviner -->
+    <div class="margin-8 clear"></div>
+
+{% endblock %}

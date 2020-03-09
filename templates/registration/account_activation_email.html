@@ -1,0 +1,7 @@
+{% autoescape off %}
+    Здравствуйте {{ user.username }},
+
+    Для подтверждения регистрации, перейдите по ссылке ниже:
+
+    http://{{ domain }}{% url 'registration:activate' uidb64=uid token=token %}
+{% endautoescape %}

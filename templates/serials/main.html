@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Сериалы{% endblock %}
+
+{% block menu %}
+
+    <li><a href="{% url 'index' %}">Главная</a></li>
+    <li><a href="{% url 'movies:index' %}">Фильмы</a></li>
+    <li class="active"><a href="{% url 'serials:index' %}">Сериалы</a></li>
+    <li><a href="{% url 'rating' %}">Рейтинг фильмов</a></li>
+    <li><a href="{% url 'contacts:index' %}">Контакты</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+    {% if serial_list %}
+
+        <!-- Page title -->
+        <h1>Сериалы</h1>
+        <hr>
+
+        {% for s in serial_list %}
+
+            <!-- Row block -->
+            <div class="row">
+
+                <!-- Serial well block -->
+                <div class="well clearfix">
+
+                    <!-- Poster column block -->
+                    <div class="col-lg-3 col-md-2 text-center">
+
+                        <!-- Serial poster -->
+                        <img class="img-thumbnail" src="{{ s.serial_url_poster }}" alt="{{ s.serial_title }}">
+
+                        <!-- Serial title -->
+                        <p class="film_label">{{ s.serial_title }}</p>
+                    </div>
+
+                    <!-- Description column block -->
+                    <div class="col-lg-9 col-md-10">
+
+                        <!-- Movie description -->
+                        <p style="font-size: 18px;">{{ s.serial_desc }}</p>
+                    </div>
+
+                    <!-- Link column block -->
+                    <div class="col-lg-12">
+
+                        <!-- Link to content -->
+                        <a class="btn btn-lg btn-warning pull-right"
+                           href="{% url 'serials:detail' s.id %}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <!-- Empty message -->
+        <h3>Сериалы не найдены...</h3>
+
+    {% endif %}
+
+    <!-- Deviner block -->
+    <hr>
+
+{% endblock %}

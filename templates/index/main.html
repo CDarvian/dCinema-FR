@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block menu %}
+
+    <li class="active"><a href="{% url 'index' %}">Главная</a></li>
+    <li><a href="{% url 'movies:index' %}">Фильмы</a></li>
+    <li><a href="{% url 'serials:index' %}">Сериалы</a></li>
+    <li><a href="{% url 'rating' %}">Рейтинг фильмов</a></li>
+    <li><a href="{% url 'contacts:index' %}">Контакты</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+    {% if latest_movies_list %}
+
+        <!-- Section title -->
+        <h2>Новые фильмы</h2>
+        <hr>
+
+        <!-- Section row -->
+        <div class="row">
+
+            {% for m in latest_movies_list %}
+
+                <!-- Film block -->
+                <div class="film_block col-lg-3 col-md-3 col-sm-3 col-xs-6">
+
+                    <!-- Link to content -->
+                    <a href="{% url 'movies:detail' m.id %}">
+
+                        <!-- Film poster -->
+                        <img class="img-thumbnail" src="{{ m.movie_url_poster }}" alt="{{ m.movie_title }} Poster">
+                    </a>
+
+                    <!-- Link to content -->
+                    <a href="{% url 'movies:detail' m.id %}">
+
+                        <!-- Label block -->
+                        <div class="film_label">
+
+                            <!-- Film label -->
+                            {{ m.movie_title }}
+
+                            {% if m.was_pub_recently %}
+
+                                <br>
+
+                                <!-- Badge -->
+                                <div class="badge">Новое!</div>
+
+                            {% endif %}
+                        </div>
+                    </a>
+
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <!-- Empty message -->
+        <h4>Наш программист ушел в отпуск и без него наши фильмы ушли, извините 🤷‍</h4>
+        <hr>
+
+    {% endif %}
+
+    <!-- Divider -->
+    <div class="margin-8"></div>
+
+    {% if latest_serials_list %}
+
+        <!-- Section title -->
+        <h2>Новые сериалы</h2>
+        <hr>
+
+        <!-- Section row -->
+        <div class="row">
+
+            {% for s in latest_serials_list %}
+
+                <!-- Serial block -->
+                <div class="film_block col-lg-3 col-md-3 col-sm-3 col-xs-6">
+
+                    <!-- Link to content -->
+                    <a href="{% url 'serials:detail' s.id %}">
+
+                        <!-- Serial poster -->
+                        <img class="img-thumbnail" src="{{ s.serial_url_poster }}" alt="{ s.serial_title }} Poster">
+                    </a>
+
+                    <!-- Link to content -->
+                    <a href="{% url 'serials:detail' s.id %}">
+
+                        <!-- Label block -->
+                        <div class="film_label">
+
+                            <!-- Serial label -->
+                            {{ s.serial_title }}
+
+                            {% if s.was_pub_recently %}
+
+                                <br>
+
+                                <!-- Badge -->
+                                <div class="badge">Новое!</div>
+
+                            {% endif %}
+                        </div>
+                    </a>
+
+                </div>
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <!-- Empty message -->
+        <h4>Наш программист ушел в отпуск и без него наши сериалы ушли, извините 🤷‍</h4>
+        <hr>
+
+    {% endif %}
+
+    <!-- Divider -->
+    <div class="margin-8"></div>
+
+    {% if latest_news_list %}
+
+        <!-- Section title -->
+        <h2>Новости</h2>
+        <hr>
+
+        <!-- Content list -->
+        <ul class="list-group">
+
+            {% for n in latest_news_list %}
+
+                <!-- List item -->
+                <li class="list-group-item list-group-item-warning">
+
+                    <!-- Item title -->
+                    <h4>{{ n.news_title }}</h4>
+
+                    <!-- Link to content -->
+                    <a style="margin-top: -35px;" class="btn btn-warning pull-right"
+                       href="{% url 'news:detail' n.id %}">Читать</a>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <!-- Empty message -->
+        <h4>Наш программист ушел в отпуск и без него наши новости ушли, извините 🤷‍</h4>
+
+    {% endif %}
+
+{% endblock %}

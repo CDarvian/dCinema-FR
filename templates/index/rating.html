@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Рейтинг фильмов{% endblock %}
+
+{% block menu %}
+
+    <li><a href="{% url 'index' %}">Главная</a></li>
+    <li><a href="{% url 'movies:index' %}">Фильмы</a></li>
+    <li><a href="{% url 'serials:index' %}">Сериалы</a></li>
+    <li class="active"><a href="{% url 'rating' %}">Рейтинг фильмов</a></li>
+    <li><a href="{% url 'contacts:index' %}">Контакты</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+    {% if movies_list %}
+
+        <!-- Page title -->
+        <h1>Рейтинг фильмов:</h1>
+        <hr>
+
+        <!-- Rating table -->
+        <table class="table table-bordered">
+
+            <!-- Head -->
+            <thead>
+
+            <!-- Row -->
+            <tr>
+                <!-- Columns -->
+                <th></th>
+                <th>Фильм</th>
+                <th class="text-center">Год</th>
+                <th class="text-center">Рейтинг</th>
+            </tr>
+            </thead>
+
+            <!-- Body -->
+            <tbody>
+
+            {% for m in movies_list %}
+
+                <!-- Row -->
+                <tr>
+
+                    <!-- Poster column -->
+                    <td class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
+                        <!-- Poster image -->
+                        <img class="img-responsive img-thumbnail" src="{{ m.movie_url_poster }}"
+                             alt="{{ m.movie_title }} Poster">
+                    </td>
+
+                    <!-- Title column -->
+                    <td class="vert-align">
+
+                        <!-- Link to content -->
+                        <a href="{% url 'movies:detail' m.id %}">{{ m.movie_title }}</a>
+                    </td>
+
+                    <!-- Year column -->
+                    <td class="text-center vert-align">{{ m.movie_year }}</td>
+
+                    <!-- Rating column -->
+                    <td class="text-center vert-align">
+
+                        <!-- Badge -->
+                        <span class="badge">{{ m.movie_rating }}</span>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+        <!-- Empty message -->
+        <h2>Фильмы не найдены...</h2>
+
+    {% endif %}
+
+    <!-- Deviner block -->
+    <hr>
+
+{% endblock %}

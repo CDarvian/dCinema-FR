@@ -1,0 +1,403 @@
+{% load static %}
+
+<!-- DOCTYPE File -->
+<!DOCTYPE html>
+
+<!-- Starting HTML document -->
+
+<!-- Selecting Russian language -->
+<html lang="ru">
+
+<!-- Starting site head -->
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="yandex-tableau-widget"
+          content="logo=http://127.0.0.1:8000/static/img/icon.png, color=#3b772f, feed=feed.json"/>
+    <meta name="theme-color" content="#3b772f">
+
+
+    <!-- Site title -->
+    <title>КиноДруг | {% block title %}Страница{% endblock %}</title>
+
+    <!-- Addition shortcut icon -->
+    <link rel="shortcut icon" href="{% static 'img/icon.png' %}">
+    <link rel="icon" sizes="192x192" href="{% static 'img/icon.png' %}">
+
+    <!-- Connecting Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Connecting CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<!-- Ending site head -->
+
+<!-- Starting site body -->
+
+<body>
+<!-- Fluid (Fullscreen) container -->
+<div class="container-fluid">
+
+    <!-- Row block -->
+    <div class="row">
+
+        <!-- Navbar -->
+        <nav role="navigation" class="navbar navbar-inverse">
+
+            <!-- Navbar container -->
+            <div class="container">
+
+                <!-- Header (Logo) -->
+                <div class="header navbar-header">
+
+                    <!--Logo container-->
+                    <div class="container">
+
+                        <!-- Row block -->
+                        <div class="row">
+
+                            <!-- Fullscreen column -->
+                            <div class="col-lg-12">
+
+                                <h1><a href="{% url 'index' %}">КиноДруг</a></h1>
+
+                                <p>Кино - ваш друг!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile collapse button -->
+                    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Buttons menu -->
+                <div id="navbarCollapse" class="collapse navbar-collapse navbar-right">
+
+                    <!-- Checklist -->
+                    <ul class="nav nav-pills">
+
+                        {% block menu %}
+
+                            <li><a href="{% url 'index' %}">Главная</a></li>
+                            <li><a href="{% url 'movies:index' %}">Фильмы</a></li>
+                            <li><a href="{% url 'serials:index' %}">Сериалы</a></li>
+                            <li><a href="{% url 'rating' %}">Рейтинг фильмов</a></li>
+                            <li><a href="{% url 'contacts:index' %}">Контакты</a></li>
+
+                        {% endblock %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<!-- Site_Content block -->
+<div class="wrapper">
+
+    <!-- Row block -->
+    <div class="row">
+
+        <!-- Bootstrap container -->
+        <div class="container">
+
+            <!-- Content -->
+            <div class="col-lg-9 col-lg-push-3">
+
+                <!-- Search form (For mobile) -->
+                <form role="search" class="visible-xs">
+
+                    <!-- Form group block -->
+                    <div class="form-group">
+
+                        <!--Input group block-->
+                        <div class="input-group">
+
+                            <!-- Search field -->
+                            <input type="search" required class="form-control input-lg" placeholder="Ваш запрос:"
+                                   autocomplete="off">
+
+                            <!-- Group button -->
+                            <div class="input-group-btn">
+
+                                <!-- Button -->
+                                <button class="btn btn-default btn-lg" type="submit">
+
+                                    <!-- Search icon -->
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                {% block content %}
+                    <h1>Наш программист ушел в отпуск и без него наш сайт опустел, извините 🤷‍</h1>
+                {% endblock %}
+
+                <!-- Clearfix block -->
+                <div class="margin-8 clear"></div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-lg-pull-9">
+
+                <!-- Side Panel -->
+                <div class="panel panel-info hidden-xs">
+
+                    <!-- Heading -->
+                    <div class="panel-heading">
+
+                        <!-- Header -->
+                        <div class="sidebar-header">Поиск</div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="panel-body">
+
+                        <!-- Search form -->
+                        <form role="search">
+
+                            <!-- Form group block -->
+                            <div class="form-group">
+
+                                <!--Input group block-->
+                                <div class="input-group">
+
+                                    <!-- Search field -->
+                                    <input type="search" required class="form-control input-lg"
+                                           placeholder="Ваш запрос:" autocomplete="off">
+
+                                    <!-- Group button -->
+                                    <div class="input-group-btn">
+
+                                        <!-- Button -->
+                                        <button class="btn btn-default btn-lg" type="submit">
+
+                                            <!-- Search icon -->
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="panel panel-info">
+
+                    {% if user.is_authenticated %}
+
+                        <!-- Heading -->
+                        <div class="panel-heading">
+
+                            <!-- Header -->
+                            <div class="sidebar-header">Профиль</div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="panel-body">
+
+                            <p class="bold">Привет, {{ user.first_name }}!</p>
+
+                            <p>Имя пользователя: {{ user.username }}</p>
+
+                            {% if user.is_staff %}
+
+                                <p>
+
+                                    <a href="{% url 'admin:index' %}">Админ-панель</a>
+                                </p>
+
+                            {% endif %}
+
+                            <a href="{% url 'profile' user.username %}" class="btn btn-warning pull-right">Открыть
+                                профиль</a>
+
+                            <a href="{% url 'logout' %}" class="btn btn-warning pull-left">Выход</a>
+                        </div>
+
+                    {% else %}
+
+                        <!-- Heading -->
+                        <div class="panel-heading">
+
+                            <!-- Header -->
+                            <div class="sidebar-header">Авторизация</div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="panel-body">
+
+                            <!-- Login form -->
+                            <form method="post" action="{% url 'login' %}">
+
+                                <!-- CSRF Protection -->
+                                {% csrf_token %}
+
+                                <!-- Form group block -->
+                                <div class="form-group">
+
+                                    <!-- Username field -->
+                                    <input type="text" name="username" required class="form-control input-lg"
+                                           placeholder="Логин:" autocomplete="off">
+                                </div>
+
+                                <!-- Form group block -->
+                                <div class="form-group">
+
+                                    <!-- Password field -->
+                                    <input type="password" name="password" required class="form-control input-lg"
+                                           placeholder="Пароль:" autocomplete="off">
+                                </div>
+
+                                <!-- Form group block -->
+                                <div class="form-group">
+
+                                    <!-- Reset password link -->
+                                    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+                                </div>
+
+                                <!-- Register link -->
+                                <a href="{% url 'registration:register' %}" class="btn btn-warning pull-left">Регистрация</a>
+
+                                <!-- Enter button -->
+                                <button type="submit" class="btn btn-warning pull-right">
+
+                                    <!-- Lock icon -->
+                                    <i class="glyphicon glyphicon-lock"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                    {% endif %}
+                </div>
+
+                <!-- Side Panel -->
+                <div class="panel panel-info">
+
+                    <!-- Heading -->
+                    <div class="panel-heading">
+
+                        <!-- Header -->
+                        <div class="sidebar-header">
+                            Последняя новость
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="panel-body">
+
+                        <!-- Content -->
+                        <div class="side_panel_news">
+
+                            <!-- News pub date -->
+                            <p>{{ last_news.pub_date }}</p>
+
+                            <!-- Link to news -->
+                            <h4>
+                                <a href="{% url 'news:detail' last_news.id %}">{{ last_news.news_title }}</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="panel panel-info">
+
+                    <!-- Heading -->
+                    <div class="panel-heading">
+
+                        <!-- Header -->
+                        <div class="sidebar-header">Рейтинг фильмов</div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="panel-body">
+
+                        <!-- List -->
+                        <ul class="list-group">
+
+                            {% if latest_movies_list %}
+
+                                {% for m in latest_movies_list %}
+
+                                    <!-- List item -->
+                                    <li class="list-group-item list-group-item-warning">
+
+                                        <!-- Rating badge -->
+                                        <span class="badge">{{ m.movie_rating }}</span>
+                                        <!-- Link to movie -->
+                                        <a href="{% url 'movies:detail' m.id %}">{{ m.movie_title }}</a>
+                                    </li>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <li class="list-group-item list-group-item-warning">
+                                    Фильмов нет...
+                                </li>
+
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clear block -->
+    <div class="clear"></div>
+</div>
+
+<!-- Footer -->
+<footer>
+
+    <!-- Bootstrap container -->
+    <div class="container">
+
+        <!-- Copyright link -->
+        <p class="text-center">&copy; <a href="https://darvianone.pythonanywhere.com">D. Folio</a> - 2020</p>
+    </div>
+</footer>
+
+<!-- Connecting JQuery and Bootstrap scripts -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="https://yastatic.net/browser-updater/v1/script.js" charset="utf-8"></script>
+<script>var yaBrowserUpdater = new ya.browserUpdater.init({
+    "lang": "ru",
+    "browsers": {
+        "yabrowser": "16.12",
+        "chrome": "62",
+        "ie": "10",
+        "opera": "49",
+        "safari": "9.1",
+        "fx": "57",
+        "iron": "35",
+        "flock": "Infinity",
+        "palemoon": "25",
+        "camino": "Infinity",
+        "maxthon": "4.5",
+        "seamonkey": "2.3"
+    },
+    "theme": "green"
+});</script>
+
+</body>
+<!-- Ending site body -->
+
+</html>
+<!-- Ending HTML document -->

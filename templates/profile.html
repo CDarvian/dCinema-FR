@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль - {{ usr.username }}{% endblock %}
+
+{% block content %}
+
+    {% if usr.username == user.username %}
+
+        <!-- Page title -->
+        <h1>{{ usr.username }} (Это вы)</h1>
+        <hr>
+
+    {% else %}
+
+        <!-- Page title -->
+        <h1>{{ usr.username }}</h1>
+        <hr>
+
+    {% endif %}
+
+    <!-- Title -->
+    <h4>Имя: {{ usr.first_name }}</h4>
+    <hr>
+
+    <!-- Title -->
+    <h4>Фамилия: {{ usr.last_name }}</h4>
+    <hr>
+
+    {% if user.is_staff %}
+
+        <!-- Title -->
+        <h4>Email: {{ usr.email }}</h4>
+
+    {% else %}
+
+        <!-- Title -->
+        <h4>Email: *Скрыто*</h4>
+
+    {% endif %}
+
+    <hr>
+
+    {% if usr.is_staff %}
+
+        <!-- Title -->
+        <h4>Является администратором 🔧</h4>
+
+    {% else %}
+
+        <!-- Title -->
+        <h4>Не является администратором</h4>
+
+    {% endif %}
+
+    <hr>
+
+    <!-- Title -->
+    <p>Зарегистрировался: {{ usr.date_joined }}</p>
+
+{% endblock %}

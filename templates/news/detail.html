@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ n.news_title }}{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>{{ n.news_title }}</h1>
+    <hr>
+
+    <!-- Diviner -->
+    <div class="margin-8"></div>
+
+    <!-- Content well-lg block -->
+    <div class="well well-lg">
+
+        <!-- Content text -->
+        {{ n.news_text }}
+    </div>
+
+    <!-- Clear diviner -->
+    <div class="margin-8"></div>
+
+    <!-- Review title -->
+    <h2>Отзывы об "{{ n.news_title }}"</h2>
+    <hr>
+
+    {% if user.is_authenticated %}
+
+        <!-- Well block -->
+        <div class="well">
+
+            <!-- Block title -->
+            <h4>Форма добавления комментария:</h4>
+            <hr>
+
+            <!-- Add comment block -->
+            <form action method="post">
+
+                <!-- CSRF Protection -->
+                {% csrf_token %}
+
+                <!-- Form group block -->
+                <div class="form-group">
+
+                    <!-- Reviewer name field label -->
+                    <label>Имя:</label>
+
+                    <!-- Reviewer name field -->
+                    <input name="reviewer" class="form-control" type="text" value="{{ user.first_name }}" readonly
+                           autocomplete="off">
+                </div>
+
+                <!-- Form group block -->
+                <div class="form-group">
+
+                    <!-- Review text field label -->
+                    <label>Текст комментария:</label>
+
+                    <!-- Review text field -->
+                    <textarea name="review" class="form-control" maxlength="80" required autocomplete="off"></textarea>
+                </div>
+
+                <!-- Add comment button -->
+                <button class="btn btn-warning" type="submit">Добавить</button>
+            </form>
+        </div>
+
+    {% else %}
+
+        <div class="well">
+
+            Для размещения комментариев, необходимо <a href="{% url 'login' %}">авторизироваться</a>.
+        </div>
+
+    {% endif %}
+
+    {% if last_comments %}
+
+        {% for comment in last_comments %}
+
+            <!-- Review block -->
+            <div class="panel panel-info">
+
+                <!-- Reviewer name block -->
+                <div class="panel-heading">
+
+                    <!-- Reviewer name -->
+                    <i class="glyphicon glyphicon-user"></i> <span>{{ comment.name_author }}</span>
+                </div>
+
+                <!-- Reviewer text block -->
+                <div class="panel-body">
+
+                    <!-- Reviewer text -->
+                    {{ comment.comment_text }}
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="well">
+
+            Комментарии отсутствуют, вы можете стать первым.
+        </div>
+
+    {% endif %}
+
+{% endblock %}

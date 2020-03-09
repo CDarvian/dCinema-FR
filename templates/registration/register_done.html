@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Регистрация</h1>
+
+    <!-- Page description -->
+    <p>Регистрация успешно завершена. Добро пожаловать в круг пользователей портала. Если вы хотите перейти к форме
+        авторизации, то нажмите на кнопку ниже.</p>
+    <hr>
+
+    <a class="btn btn-warning pull-right" href="{% url 'login' %}">Перейти</a>
+
+{% endblock %}

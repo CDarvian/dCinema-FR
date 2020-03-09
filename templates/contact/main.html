@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block menu %}
+
+    <li><a href="{% url 'index' %}">Главная</a></li>
+    <li><a href="{% url 'movies:index' %}">Фильмы</a></li>
+    <li><a href="{% url 'serials:index' %}">Сериалы</a></li>
+    <li><a href="{% url 'rating' %}">Рейтинг фильмов</a></li>
+    <li class="active"><a href="{% url 'contacts:index' %}">Контакты</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Контакты</h1>
+    <hr>
+
+    <!-- Description -->
+    <p style="font-size: 18px; margin-bottom: 3%;">Здесь вы можете связаться с администратором нашего портала.</p>
+
+    <!-- Send ticket form -->
+    <form action="{% url 'contacts:sended' %}" method="POST">
+
+        <!-- CSRF protection -->
+        {% csrf_token %}
+
+        <!-- Bootstrap form-group -->
+        <div class="form-group">
+
+            {% if user.is_authenticated %}
+
+                <!-- Name field -->
+                <input type="text" name="author" required class="form-control" placeholder="Ваше имя:"
+                       value="{{ user.first_name }}">
+
+            {% else %}
+
+                <!-- Name field -->
+                <input type="text" name="author" required class="form-control" placeholder="Ваше имя:">
+
+            {% endif %}
+        </div>
+
+        <!-- Bootstrap form-group -->
+        <div class="input-group form-group">
+
+            {% if user.is_authenticated %}
+
+                <!-- Email field -->
+                <input type="email" name="email" required class="form-control" placeholder="Ваш Email:"
+                       value="{{ user.email }}" autocomplete="off">
+
+            {% else %}
+
+                <!-- Email field -->
+                <input type="email" name="email" required class="form-control" placeholder="Ваш Email:"
+                       autocomplete="off">
+
+            {% endif %}
+
+            <!-- Input addon -->
+            <span class="input-group-addon">@example.com</span>
+        </div>
+
+        <!-- Bootstrap form-group -->
+        <div class="form-group">
+
+            <!-- Message field -->
+            <textarea required name="message" class="form-control" placeholder="Ваше сообщение:"
+                      autocomplete="off"></textarea>
+        </div>
+
+        <!-- Send button -->
+        <button type="submit" class="btn btn-lg btn-warning pull-right">Отправить</button>
+    </form>
+
+    <!-- Deviner block -->
+    <hr>
+
+{% endblock %}
