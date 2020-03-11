@@ -16,8 +16,10 @@ def detail(request, news_id):
     if request.method == 'POST':
         reviewer_name = request.POST['reviewer']
         review_text = request.POST['review']
+        reviewer_username = request.POST['username_author']
 
-        new_comment = n.comment_set.create(name_author=reviewer_name, comment_text=review_text)
+        new_comment = n.comment_set.create(name_author=reviewer_name, comment_text=review_text,
+                                           username_author=reviewer_username)
 
     last_comments_list = n.comment_set.order_by('-id')[:5]
 

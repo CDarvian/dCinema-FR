@@ -5,6 +5,7 @@ from django.db import models
 
 class Ticket(models.Model):
     ticket_name = models.CharField('Имя отправителя:', max_length=50)
+    username_author = models.CharField('Имя пользователя отправителя:', max_length=60)
     ticket_email = models.CharField('Почта отправителя:', max_length=70)
 
     ticket_text = models.TextField('Сообщение отправителя:')

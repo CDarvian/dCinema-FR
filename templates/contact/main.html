@@ -36,10 +36,16 @@
                 <input type="text" name="author" required class="form-control" placeholder="Ваше имя:"
                        value="{{ user.first_name }}">
 
+                <!-- Username field -->
+                <input type="hidden" name="username_author" value="{{ user.username }}">
+
             {% else %}
 
                 <!-- Name field -->
                 <input type="text" name="author" required class="form-control" placeholder="Ваше имя:">
+
+                <!-- Username field -->
+                <input type="hidden" name="username_author" value="Аноним">
 
             {% endif %}
         </div>

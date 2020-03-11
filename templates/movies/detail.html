@@ -82,6 +82,9 @@
                     <!-- Reviewer name field -->
                     <input name="reviewer" class="form-control" type="text" value="{{ user.first_name }}" readonly
                            autocomplete="off">
+
+                    <!-- Username field -->
+                    <input type="hidden" name="username_author" value="{{ user.username }}">
                 </div>
 
                 <!-- Form group block -->
@@ -119,7 +122,7 @@
                 <div class="panel-heading">
 
                     <!-- Reviewer name -->
-                    <i class="glyphicon glyphicon-user"></i> <span>{{ comment.name_author }}</span>
+                    <i class="glyphicon glyphicon-user"></i> <span><a href="{% url 'profile' comment.username_author %}" style="color: #ffffff !important;">{{ comment.name_author }}</a></span>
                 </div>
 
                 <!-- Reviewer text block -->

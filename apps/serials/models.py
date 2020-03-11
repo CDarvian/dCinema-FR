@@ -33,8 +33,12 @@ class Serial(models.Model):
 
 class Comment(models.Model):
     serial = models.ForeignKey(Serial, on_delete=models.CASCADE)
-    name_author = models.CharField('Автор:', max_length=50)
+    name_author = models.CharField('Имя автора:', max_length=50)
+    username_author = models.CharField('Имя пользователя автора:', max_length=60)
     comment_text = models.CharField('Текст комментария:', max_length=80)
+
+    def __str__(self):
+        return self.name_author + ' - ' + self.username_author
 
     class Meta:
         verbose_name = 'Комментарий'

@@ -11,7 +11,7 @@ def index(request):
 
 def sended(request):
     ticket = Ticket(ticket_name=request.POST['author'], ticket_email=request.POST['email'],
-                    ticket_text=request.POST['message'])
+                    ticket_text=request.POST['message'], username_author=request.POST['username_author'])
     ticket.save()
 
     return render(request, 'contact/sended.html')
