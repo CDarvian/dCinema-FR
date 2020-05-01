@@ -114,7 +114,7 @@
             <div class="col-lg-9 col-lg-push-3">
 
                 <!-- Search form (For mobile) -->
-                <form role="search" class="visible-xs">
+                <form role="search" method="get" action="{% url 'search' %}" class="visible-xs">
 
                     <!-- Form group block -->
                     <div class="form-group">
@@ -123,7 +123,7 @@
                         <div class="input-group">
 
                             <!-- Search field -->
-                            <input type="search" required class="form-control input-lg" placeholder="Ваш запрос:"
+                            <input type="search" name="searchform" required class="form-control input-lg" placeholder="Ваш запрос:"
                                    autocomplete="off">
 
                             <!-- Group button -->
