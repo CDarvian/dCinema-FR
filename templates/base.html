@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="yandex-tableau-widget"
-          content="logo=http://127.0.0.1:8000/static/img/icon.png, color=#3b772f, feed=feed.json"/>
+          content="logo=http://127.0.0.1:8000/static/img/icon.png, color=#ffffff, feed=feed.json"/>
     <meta name="theme-color" content="#3b772f">
 
 
@@ -165,7 +165,7 @@
                     <div class="panel-body">
 
                         <!-- Search form -->
-                        <form role="search">
+                        <form role="search" method="get" action="{% url 'search' %}">
 
                             <!-- Form group block -->
                             <div class="form-group">
@@ -174,8 +174,7 @@
                                 <div class="input-group">
 
                                     <!-- Search field -->
-                                    <input type="search" required class="form-control input-lg"
-                                           placeholder="Ваш запрос:" autocomplete="off">
+                                    <input type="search" name="searchform" class="form-control input-lg" placeholder="Введите запрос" autocomplete="off">
 
                                     <!-- Group button -->
                                     <div class="input-group-btn">
@@ -208,7 +207,7 @@
                         <!-- Body -->
                         <div class="panel-body">
 
-                            <p class="bold">Привет, {{ user.first_name }}!</p>
+                            <p class="bold">Привет, {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}!</p>
 
                             <p>Имя пользователя: {{ user.username }}</p>
 
@@ -301,13 +300,21 @@
                         <!-- Content -->
                         <div class="side_panel_news">
 
-                            <!-- News pub date -->
-                            <p>{{ last_news.pub_date }}</p>
+                            {% if last_news %}
 
-                            <!-- Link to news -->
-                            <h4>
-                                <a href="{% url 'news:detail' last_news.id %}">{{ last_news.news_title }}</a>
-                            </h4>
+                                <!-- News pub date -->
+                                <p>{{ last_news.0.pub_date }}</p>
+
+                                <!-- Link to news -->
+                                <h4>
+                                    <a href="{% url 'news:detail' last_news.0.id %}">{{ last_news.0.news_title }}</a>
+                                </h4>
+
+                            {% else %}
+
+                                <p>Новостей нет</p>
+
+                            {% endif %}
                         </div>
                     </div>
                 </div>

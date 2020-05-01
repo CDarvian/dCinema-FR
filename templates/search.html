@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block title %}Поиск - {{ querry }}{% endblock %}
+
+{% block content %}
+
+    <!-- Page title -->
+    <h1>Результаты запроса:</h1>
+    <hr>
+
+    <!-- Deviner -->
+    <div class="margin-8"></div>
+
+    {% if o_movie_list %}
+
+        <!-- Article title -->
+        <h3>Фильмы:</h3>
+        <hr>
+
+        {% for o_m in o_movie_list %}
+
+            <!-- Row block -->
+            <div class="row">
+
+                <!-- Movie well block -->
+                <div class="well clearfix">
+
+                    <!-- Poster column block -->
+                    <div class="col-lg-3 col-md-2 text-center">
+
+                        <!-- Movie poster -->
+                        <img class="img-thumbnail" src="{{ o_m.movie_url_poster }}" alt="{{ o_m.movie_title }} Poster">
+
+                        <!-- Movie title -->
+                        <p class="film_label">{{ o_m.movie_title }}</p>
+                    </div>
+
+                    <!-- Description column block -->
+                    <div class="col-lg-9 col-md-10">
+
+                        <!-- Movie description -->
+                        <p style="font-size: 18px">{{ o_m.movie_desc }}</p>
+                    </div>
+
+                    <!-- Link column block -->
+                    <div class="col-lg-12">
+
+                        <!-- Link to content -->
+                        <a class="btn btn-lg btn-warning pull-right" href="{% url 'movies:detail' o_m.id %}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+        <!-- Deviner -->
+        <div class="margin-8"></div>
+
+    {% endif %}
+
+    {% if o_serial_list %}
+
+        <!-- Article title -->
+        <h3>Сериалы:</h3>
+        <hr>
+
+        {% for o_s in o_serial_list %}
+
+            <!-- Row block -->
+            <div class="row">
+
+                <!-- Serial well block -->
+                <div class="well clearfix">
+
+                    <!-- Poster column block -->
+                    <div class="col-lg-3 col-md-2 text-center">
+
+                        <!-- Serial poster -->
+                        <img class="img-thumbnail" src="{{ o_s.serial_url_poster }}" alt="{{ o_s.serial_title }}">
+
+                        <!-- Serial title -->
+                        <p class="film_label">{{ o_s.serial_title }}</p>
+                    </div>
+
+                    <!-- Description column block -->
+                    <div class="col-lg-9 col-md-10">
+
+                        <!-- Movie description -->
+                        <p style="font-size: 18px;">{{ o_s.serial_desc }}</p>
+                    </div>
+
+                    <!-- Link column block -->
+                    <div class="col-lg-12">
+
+                        <!-- Link to content -->
+                        <a class="btn btn-lg btn-warning pull-right"
+                           href="{% url 'serials:detail' o_s.id %}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+        <!-- Deviner -->
+        <div class="margin-8"></div>
+
+    {% endif %}
+
+    {% if o_news_list %}
+
+        <!-- Article title -->
+        <h3>Новости:</h3>
+        <hr>
+
+        <!-- Content list -->
+        <ul class="list-group">
+
+            {% for o_n in o_news_list %}
+
+                <!-- List item -->
+                <li class="list-group-item list-group-item-warning">
+
+                    <!-- Item title -->
+                    <h4>{{ o_n.news_title }}</h4>
+
+                    <!-- Link to content -->
+                    <a style="margin-top: -35px;" class="btn btn-warning pull-right"
+                       href="{% url 'news:detail' o_n.id %}">Читать</a>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    {% if not o_movie_list and not o_serial_list and not o_news_list %}
+
+        <p style="font-size: 20px; color: #c7ae14">По вашему запросу ничего не найдено :(</p>
+        <hr>
+
+    {% endif %}
+
+{% endblock %}

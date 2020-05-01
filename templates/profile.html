@@ -19,11 +19,11 @@
     {% endif %}
 
     <!-- Title -->
-    <h4>Имя: {{ usr.first_name }}</h4>
+    <h4>Имя: {% if usr.first_name %}{{ usr.first_name }}{% else %}Отсутствует{% endif %}</h4>
     <hr>
 
     <!-- Title -->
-    <h4>Фамилия: {{ usr.last_name }}</h4>
+    <h4>Фамилия: {% if usr.last_name %}{{ usr.last_name }}{% else %}Отсутствует{% endif %}</h4>
     <hr>
 
     {% if user.is_staff %}

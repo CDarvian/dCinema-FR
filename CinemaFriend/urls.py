@@ -31,6 +31,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('rating/', views.rating, name='rating'),
 
+    path('search/', views.search, name='search'),
+
     path('news/', include('news.urls')),
     path('movies/', include('movies.urls')),
     path('serials/', include('serials.urls')),
