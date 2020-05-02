@@ -9,7 +9,7 @@ from django.utils import timezone
 class Serial(models.Model):
     serial_title = models.CharField('Название:', max_length=70)
 
-    serial_url_video = models.CharField('Embeded ссылка на видео в YouTube:', max_length=170)
+    serial_url_video = models.CharField('ID видео на YouTube:', max_length=170)
     serial_url_poster = models.CharField('Ссылка на постер:', max_length=170)
 
     serial_year = models.IntegerField('Год выхода:')

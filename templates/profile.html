@@ -54,6 +54,12 @@
 
     <hr>
 
+    {% if usr.username == user.username %}
+
+        <a href="{% url 'password_change' %}" class="btn btn-warning pull-right btn-lg">Сменить пароль</a>
+
+    {% endif %}
+
     <!-- Title -->
     <p>Зарегистрировался: {{ usr.date_joined }}</p>
 

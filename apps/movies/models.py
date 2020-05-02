@@ -9,7 +9,7 @@ from django.utils import timezone
 class Movie(models.Model):
     movie_title = models.CharField('Название:', max_length=70)
 
-    movie_url_video = models.CharField('Embeded ссылка на видео в YouTube:', max_length=170)
+    movie_url_video = models.CharField('ID видео на YouTube:', max_length=170)
     movie_url_poster = models.CharField('Ссылка на постер:', max_length=170)
 
     movie_year = models.IntegerField('Год выхода:')
