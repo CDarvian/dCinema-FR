@@ -24,4 +24,4 @@ This website intended for:
   - Leave a comment;
 ------------
 
-**The program was created for 2 months**
+**The website was created for 2 months**
